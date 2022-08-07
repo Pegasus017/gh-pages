@@ -9,6 +9,7 @@ const colorOptions = Array.from(
 );
 const color = document.getElementById("color");
 const lineWidth = document.getElementById("line-width");
+const textLineWidth = document.getElementById("text-line-width");
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
@@ -40,6 +41,10 @@ function cancelPainting() {
 }
 function onLineWidthChange(event) {
   ctx.lineWidth = event.target.value;
+}
+
+function onTextLineWidthChange(event){
+  textLineWidth.value = event.target.value;
 }
 
 function onColorChange(event) {
@@ -96,8 +101,8 @@ function onDoubleClick(event) {
   const text = textInput.value;
   if (text !== "") {
     ctx.save();
-    ctx.lineWidth = 1;
-    ctx.font = "68px sans-serif";
+    ctx.lineWidth = `1`;
+    ctx.font = `${textLineWidth.value}px sans-serif`;
     ctx.fillText(text, event.offsetX, event.offsetY);
     ctx.restore();
   }
@@ -118,6 +123,7 @@ canvas.addEventListener("mouseup", cancelPainting);
 canvas.addEventListener("mouseleave", cancelPainting);
 canvas.addEventListener("click", onCanvasClick);
 lineWidth.addEventListener("change", onLineWidthChange);
+textLineWidth.addEventListener("change", onTextLineWidthChange);
 color.addEventListener("change", onColorChange);
 colorOptions.forEach((color) => color.addEventListener("click", onColorClick));
 modeBtn.addEventListener("click", onModeClick);
